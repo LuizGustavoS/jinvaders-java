@@ -2,28 +2,15 @@ package org.opensourcearcade.jinvaders;
 
 import org.opensourcearcade.jinvaders.entities.Entity;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsEnvironment;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-
 import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.URL;
 
 public final class ToolBox {
 
-	public static final String RES_DIR = "/res/";
+	public static final String RES_DIR = "/";
 
 	public static final ToolBox SELF = new ToolBox();
 
