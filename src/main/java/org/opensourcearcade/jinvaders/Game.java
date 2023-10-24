@@ -52,6 +52,7 @@ public final class Game extends Applet implements Runnable {
 
     private Graphics2D g2d;
 
+    private GameStates bkpState;
     private Player player;
     private Ufo ufo;
 
@@ -176,6 +177,9 @@ public final class Game extends Applet implements Runnable {
                 break;
             default:
                 break;
+        }
+        if (keyboard.isHelpKey()){
+            gameState = GameStates.HELP_SCREEN;
         }
 
         // state-independent updates
@@ -612,7 +616,7 @@ public final class Game extends Applet implements Runnable {
         // draw player shot
         if (player.getPlayerShot().visible)
             g.fillRect((int) player.getPlayerShot().x, (int) player.getPlayerShot().y, player.getPlayerShot().w, player.getPlayerShot().h);
-
+   
         // draw all alien shots
         Entity shot = ufo.getAlienShot();
         while (null != shot) {
