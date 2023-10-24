@@ -40,10 +40,10 @@ public class Help {
                 g.drawString(tmpPlayerName.substring(i, i + 1), x + charW * i, y);
         }
 
-        g.setColor(Color.red);
+        g.setColor(Cores.getCorVermelha());
         g.drawLine(x + charW * inputCaretPos, y + 2, x + charW * (inputCaretPos + 1) - 2, y + 2); // underlines
         g.drawLine(x + charW * inputCaretPos, y + 3, x + charW * (inputCaretPos + 1) - 2, y + 3); // underlines
-        g.setColor(Color.white);
+        g.setColor(Cores.getCorBranca());
 
     }
 
