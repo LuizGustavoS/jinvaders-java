@@ -69,6 +69,10 @@ public class Keyboard {
 
     public void keyEvent(KeyEvent event, boolean pressed) {
         int keyCode = event.getKeyCode();
+        joyEvent(keyCode, pressed);
+    }
+
+    public void joyEvent(int keyCode, boolean pressed) {
         switch (keyCode) {
             case KeyEvent.VK_LEFT:
                 this.leftKey = pressed;
@@ -89,12 +93,6 @@ public class Keyboard {
                 break;
             case KeyEvent.VK_BACK_SPACE:
                 this.backKey = pressed;
-                break;
-            default:
-                char c = event.getKeyChar();
-                if (pressed && this.lastKey != keyCode)
-                    if ((c > 47 && c < 91) || (c > 96 && c < 123))
-                        this.lastKey = keyCode;
                 break;
         }
     }

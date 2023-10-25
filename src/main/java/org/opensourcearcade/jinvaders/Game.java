@@ -1,9 +1,12 @@
 package org.opensourcearcade.jinvaders;
 
+import org.bbi.linuxjoy.JoyFactory;
+import org.bbi.linuxjoy.LinuxJoystick;
 import org.opensourcearcade.jinvaders.Sound.SOUNDS;
 import org.opensourcearcade.jinvaders.entities.Entity;
 import org.opensourcearcade.jinvaders.entities.Player;
 import org.opensourcearcade.jinvaders.entities.Ufo;
+import org.opensourcearcade.jinvaders.joystick.EventCallbackHandler;
 
 import java.applet.Applet;
 import java.awt.*;
@@ -81,6 +84,12 @@ public final class Game extends Applet implements Runnable {
     private final Help help = new Help();
 
     public Game() {
+        LinuxJoystick j = JoyFactory.getFirstUsableDevice();
+        if(j != null) {
+            j.setCallback(new EventCallbackHandler(keyboard));
+            j.startPollingThread(5); // sleep for 5 ms between polls
+        }
+
         System.out.println(System.getProperty("java.vm.name") + System.getProperty("java.vm.version"));
         System.out.println(ToolBox.getPackageName() + " v" + VERSION);
 
