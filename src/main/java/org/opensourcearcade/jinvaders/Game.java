@@ -55,6 +55,7 @@ public final class Game extends Applet implements Runnable {
 
     private Graphics2D g2d;
 
+    private GameStates bkpState;
     private Player player;
     private Ufo ufo;
 
@@ -185,6 +186,9 @@ public final class Game extends Applet implements Runnable {
                 break;
             default:
                 break;
+        }
+        if (keyboard.isHelpKey()){
+            gameState = GameStates.HELP_SCREEN;
         }
 
         // state-independent updates
@@ -499,10 +503,10 @@ public final class Game extends Applet implements Runnable {
         if (frameCtr > 300)
             frameCtr = 0;
 
-        g2d.setColor(Color.black);
+        g2d.setColor(Cores.getCorFundoJogo());
         g2d.clearRect(0, 0, WIDTH, HEIGHT);
 
-        g2d.setColor(Color.white);
+        g2d.setColor(Cores.getCorBranca());
         g2d.setFont(font.deriveFont(20f));
 
         final FontMetrics fm = g2d.getFontMetrics(g2d.getFont());
@@ -510,14 +514,14 @@ public final class Game extends Applet implements Runnable {
         int fontHeight = fm.getHeight();
 
         int names_height = (int) (fontHeight * 1.5);
-        ToolBox.drawText(g2d, playerName1, WIDTH / 6, names_height, Color.white);
-        ToolBox.drawText(g2d, Texts.getStrHiscore(), names_height, Color.white);
-        ToolBox.drawText(g2d, playerName2, WIDTH / 6 * 5, names_height, Color.white);
+        ToolBox.drawText(g2d, playerName1, WIDTH / 6, names_height, Cores.getCorBranca());
+        ToolBox.drawText(g2d, Texts.getStrHiscore(), names_height, Cores.getCorBranca());
+        ToolBox.drawText(g2d, playerName2, WIDTH / 6 * 5, names_height, Cores.getCorBranca());
 
         int score_height = fontHeight * 3;
-        ToolBox.drawText(g2d, NUM_FORMAT.format(score1), WIDTH / 6, score_height, Color.white);
-        ToolBox.drawText(g2d, NUM_FORMAT.format(highscore), score_height, Color.white);
-        ToolBox.drawText(g2d, NUM_FORMAT.format(score2), WIDTH / 6 * 5, score_height, Color.white);
+        ToolBox.drawText(g2d, NUM_FORMAT.format(score1), WIDTH / 6, score_height, Cores.getCorBranca());
+        ToolBox.drawText(g2d, NUM_FORMAT.format(highscore), score_height, Cores.getCorBranca());
+        ToolBox.drawText(g2d, NUM_FORMAT.format(score2), WIDTH / 6 * 5, score_height, Cores.getCorBranca());
 
         switch (gameState) {
             case SPLASH_SCREEN:
@@ -553,48 +557,48 @@ public final class Game extends Applet implements Runnable {
 
     private void drawSplashScreen(Graphics g, int height) {
         if (frameCtr < 250) {
-            ToolBox.drawText(g, Texts.getPlayInvaders()[0], 6 * height, Color.white);
-            ToolBox.drawText(g, Texts.getPlayInvaders()[1], 8 * height, Color.white);
-            ToolBox.drawText(g, Texts.getPlayInvaders()[2], 10 * height, Color.white);
+            ToolBox.drawText(g, Texts.getPlayInvaders()[0], 6 * height, Cores.getCorBranca());
+            ToolBox.drawText(g, Texts.getPlayInvaders()[1], 8 * height, Cores.getCorBranca());
+            ToolBox.drawText(g, Texts.getPlayInvaders()[2], 10 * height, Cores.getCorBranca());
         }
 
         final int X = 125;
 
-        ToolBox.drawText(g, Texts.getSplashScoreTable()[0], WIDTH / 2, 12 * height, Color.white);
+        ToolBox.drawText(g, Texts.getSplashScoreTable()[0], WIDTH / 2, 12 * height, Cores.getCorBranca());
 
-        ToolBox.drawText(g, Texts.getSplashScoreTable()[1], WIDTH / 2, 14 * height, Color.white);
+        ToolBox.drawText(g, Texts.getSplashScoreTable()[1], WIDTH / 2, 14 * height, Cores.getCorBranca());
         ToolBox.drawImageCentered(g, imagens.getUfoImg(), X, 13 * height, 0);
 
-        ToolBox.drawText(g, Texts.getSplashScoreTable()[2], WIDTH / 2, (int) (15.5 * height), Color.white);
+        ToolBox.drawText(g, Texts.getSplashScoreTable()[2], WIDTH / 2, (int) (15.5 * height), Cores.getCorBranca());
         ToolBox.drawImageCentered(g, imagens.getE3Img(), X, (int) (14.5 * height), 0);
 
-        ToolBox.drawText(g, Texts.getSplashScoreTable()[3], WIDTH / 2, 17 * height, Color.white);
+        ToolBox.drawText(g, Texts.getSplashScoreTable()[3], WIDTH / 2, 17 * height, Cores.getCorBranca());
         ToolBox.drawImageCentered(g, imagens.getE2Img(), X, 16 * height, 0);
 
-        ToolBox.drawText(g, Texts.getSplashScoreTable()[4], WIDTH / 2, (int) (18.5 * height), Color.green);
+        ToolBox.drawText(g, Texts.getSplashScoreTable()[4], WIDTH / 2, (int) (18.5 * height), Cores.getCorVerde());
         ToolBox.drawImageCentered(g, imagens.getE1Img(), X, (int) (17.5 * height), 0);
     }
 
     private void drawHelpScreen(Graphics g, int fontHeight) {
         for (int i = 0; i < Texts.getStrHelp().length; i++)
-            ToolBox.drawText(g, Texts.getStrHelp()[i], fontHeight * 2 * (i + 5), Color.white);
+            ToolBox.drawText(g, Texts.getStrHelp()[i], fontHeight * 2 * (i + 5), Cores.getCorBranca());
     }
 
     private void drawHighScoreScreen(Graphics g, int fontHeight) {
-        ToolBox.drawText(g, Texts.getStrHighscoreList(), fontHeight * 5, Color.white);
+        ToolBox.drawText(g, Texts.getStrHighscoreList(), fontHeight * 5, Cores.getCorBranca());
 
         Object[] scores = highScores.getHighScores();
         // only first 8 scores
         for (int i = 0; i + 1 < scores.length && i < 16; i += 2) {
             int y = (int) (fontHeight * (7 + i / 1.5f));
-            Color color = (i < 2) ? Color.red : Color.white;
+            Color color = (i < 2) ? Cores.getCorVermelha() : Cores.getCorBranca();
             ToolBox.drawText(g, (String) scores[i], WIDTH / 4, y, color);
             ToolBox.drawText(g, (String) scores[i + 1], 3 * WIDTH / 4, y, color);
         }
     }
 
     private void drawIngameScreen(Graphics g) {
-        g.setColor(Color.white);
+        g.setColor(Cores.getCorBranca());
         g.drawLine(0, Pos.BOTTOM_LINE_POS, WIDTH, Pos.BOTTOM_LINE_POS);
 
         // draw remaining lifes
@@ -634,11 +638,11 @@ public final class Game extends Applet implements Runnable {
         drawIngameScreen(g);
 
         if (frameCtr < 250)
-            ToolBox.drawText(g, Texts.getStrGameOver(), (int) (4.5 * fontHeight), Color.red);
+            ToolBox.drawText(g, Texts.getStrGameOver(), (int) (4.5 * fontHeight), Cores.getCorVermelha());
     }
 
     private void drawInputNameScreen(Graphics g, int fontHeight, int charWidth) {
-        ToolBox.drawText(g, Texts.getStrInputname(), fontHeight * 7, Color.white);
+        ToolBox.drawText(g, Texts.getStrInputname(), fontHeight * 7, Cores.getCorBranca());
 
         int strLen = tmpPlayerName.length();
 
@@ -648,15 +652,15 @@ public final class Game extends Applet implements Runnable {
     private void drawPressEnter(Graphics g, int fontHeight) {
         if (frameCtr < 250) {
             if (panel.hasFocus())
-                ToolBox.drawText(g, Texts.getStrPressEnter(), HEIGHT - fontHeight / 2, Color.red);
+                ToolBox.drawText(g, Texts.getStrPressEnter(), HEIGHT - fontHeight / 2, Cores.getCorVermelha());
             else
-                ToolBox.drawText(g, Texts.getStrClickToStart(), HEIGHT - fontHeight / 2, Color.red);
+                ToolBox.drawText(g, Texts.getStrClickToStart(), HEIGHT - fontHeight / 2, Cores.getCorVermelha());
         }
     }
 
     private void drawClickToContinue(Graphics g, int height) {
         if (frameCtr < 250)
-            ToolBox.drawText(g, Texts.getStrPaused(), HEIGHT - height / 2, Color.red);
+            ToolBox.drawText(g, Texts.getStrPaused(), HEIGHT - height / 2, Cores.getCorVermelha());
     }
 
     private void playWalkingSound(long time) {

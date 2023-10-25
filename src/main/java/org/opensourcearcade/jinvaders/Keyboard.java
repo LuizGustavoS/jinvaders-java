@@ -3,7 +3,23 @@ package org.opensourcearcade.jinvaders;
 import java.awt.event.KeyEvent;
 
 public class Keyboard {
-    private boolean leftKey, rightKey, spaceKey, escKey, enterKey, backKey, spaceKeyReleased;
+    private boolean leftKey;
+    private boolean rightKey;
+    private boolean spaceKey;
+    private boolean escKey;
+    private boolean enterKey;
+    private boolean backKey;
+    private boolean spaceKeyReleased;
+
+    public boolean isHelpKey() {
+        return helpKey;
+    }
+
+    public void setHelpKey(boolean helpKey) {
+        this.helpKey = helpKey;
+    }
+
+    private boolean helpKey;
     private int lastKey;
 
     public Keyboard() {
@@ -90,6 +106,9 @@ public class Keyboard {
                 break;
             case KeyEvent.VK_ENTER:
                 this.enterKey = pressed;
+                break;
+            case KeyEvent.VK_H:
+                this.helpKey = pressed;
                 break;
             case KeyEvent.VK_BACK_SPACE:
                 this.backKey = pressed;

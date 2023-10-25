@@ -10,7 +10,7 @@ public class Texts {
     private static final String STR_HIGHSCORE_LIST = "HIGHSCORES";
     private static final String STR_INPUTNAME = "INPUT YOUR NAME";
     private static final String STR_PAUSED = "PAUSED, CLICK HERE";
-    private static final String[] STR_HELP = {"ENTER = START GAME", "SPACE = FIRE", "MOVE = CURSOR LEFT/RIGHT", "ESC = LEAVE GAME"};
+    private static final String[] STR_HELP = {"ENTER = START GAME", "SPACE = FIRE", "MOVE = CURSOR LEFT/RIGHT", "ESC = LEAVE GAME", "P = PAUSE/CONTINUE GAME", "H = SHOW HELP"};
     private static final String[] SPLASH_SCORE_TABLE = {"*SCORE ADVANCE TABLE*", "=? MYSTERY", "=30 POINTS", "=20 POINTS", "=10 POINTS"};
     private static final String[] PLAY_INVADERS = {"PLAY", "JINVADERS", "V" + VERSION};
 
