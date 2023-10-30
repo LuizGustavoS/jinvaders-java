@@ -5,6 +5,8 @@ import java.util.StringTokenizer;
 
 public abstract class HighScores {
 
+	private static final int NUMBER_LINES_SCORE = 2;
+
 	protected static final int MAX_ENTRIES = 10;
 	protected static final String SEPARATOR = "#";
 	protected ArrayList<String> highScores = new ArrayList<String>();
@@ -55,41 +57,52 @@ public abstract class HighScores {
 	
 	public void postHighScore(String playerName, int newScore) {
 
-		if (newScore<=0) return;
+		if (newScore<=0) {
+			return;
+		}
 
-		if (highScores.size()==0) {
+		if (highScores.isEmpty()) {
 			highScores.add(playerName);
-			highScores.add(""+newScore);
+			highScores.add("" + newScore);
 			saveScores(playerName, newScore);
+			return;
 		}
-		else {
-			try {
-				boolean added = false;
-				for (int i = 1; i<highScores.size()&&!added; i += 2) {
-					int scoreValue = Integer.parseInt((String) highScores.get(i));
-					if (newScore>scoreValue) {
-						highScores.add(i-1, playerName);
-						highScores.add(i, ""+newScore);
-						added = true;
-					}
-					else if (newScore==scoreValue) {
-						highScores.set(i-1, playerName);
-						highScores.set(i, ""+newScore);
-						added = true;
-					}
-				}
-				if (!added) {
-					highScores.add(playerName);
-					highScores.add(""+newScore);
-				}
-				while (highScores.size()>MAX_ENTRIES*2)
-					highScores.remove(highScores.size()-1);
 
-				saveScores(playerName, newScore);
+		try {
+			calcHighScore(playerName, newScore);
+		}catch (Exception e){
+			System.err.println("postHighScore: Error parsing scores");
+		}
+	}
+
+	private void calcHighScore(String playerName, int newScore){
+
+		boolean added = false;
+		for (int i=1; i < highScores.size() && !added; i+=NUMBER_LINES_SCORE) {
+			final int scoreValue = Integer.parseInt(highScores.get(i));
+			if (newScore > scoreValue) {
+				highScores.add(i-1, playerName);
+				highScores.add(i, "" + newScore);
+				added = true;
+				continue;
 			}
-			catch (Exception e) {
-				System.err.println("postHighScore: Error parsing scores");
+
+			if (newScore==scoreValue) {
+				highScores.set(i-1, playerName);
+				highScores.set(i, "" + newScore);
+				added = true;
 			}
 		}
+
+		if (!added) {
+			highScores.add(playerName);
+			highScores.add("" + newScore);
+		}
+
+		while (highScores.size() > MAX_ENTRIES*NUMBER_LINES_SCORE){
+			highScores.remove(highScores.size()-1);
+		}
+
+		saveScores(playerName, newScore);
 	}
 }

@@ -19,10 +19,6 @@ public class EventCallbackHandler implements LinuxJoystickEventCallback {
 
 	public void callback(LinuxJoystick j, LinuxJoystickEvent ev) {
 
-		System.out.println(ev.isButtonDown());
-		System.out.println(ev.getValue());
-		System.out.println("-----");
-
         if (ev.isAxisChanged() == XboxController.D_X) {
             if (ev.getValue() > 0) {
                 keyboard.joyEvent(KeyEvent.VK_RIGHT, true);
@@ -45,7 +41,5 @@ public class EventCallbackHandler implements LinuxJoystickEventCallback {
 		}if (ev.isButtonUp() == XboxController.START) {
 			keyboard.joyEvent(KeyEvent.VK_ESCAPE, false);
 		}
-
-
 	}
 }
