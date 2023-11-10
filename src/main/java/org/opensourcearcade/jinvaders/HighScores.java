@@ -8,6 +8,9 @@ public abstract class HighScores {
 	private static final int NUMBER_LINES_SCORE = 2;
 
 	protected static final int MAX_ENTRIES = 10;
+
+	protected static final int MAX_ENTRIES_ALLOCATION = NUMBER_LINES_SCORE*MAX_ENTRIES;
+
 	protected static final String SEPARATOR = "#";
 	protected ArrayList<String> highScores = new ArrayList<String>();
 	
@@ -37,7 +40,9 @@ public abstract class HighScores {
 		if (content!=null) {
 			highScores.clear();
 			StringTokenizer st = new StringTokenizer(content, SEPARATOR);
-			for (int i = 0; st.hasMoreTokens()&&i<MAX_ENTRIES*2; i++) {
+
+			//for (int i = 0; st.hasMoreTokens()&&i<MAX_ENTRIES*2; i++) {
+			for (int i = 0; st.hasMoreTokens()&&i<MAX_ENTRIES_ALLOCATION; i++) {
 				try {
 					String name = st.nextToken();
 					String score = st.nextToken();
