@@ -39,8 +39,8 @@ public final class Game extends Applet implements Runnable {
     private static final long serialVersionUID = 1802938807824847849L;
 
     public static final String VERSION = "2.2";
-    public static final int WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-    public static final int HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+    public static final int WIDTH = 449;
+    public static final int HEIGHT = 480;
     public static final int FRAMES_PER_SECOND = 30;
     public static final Entity[][] ALIENS = new Entity[5][11];
     public static final Entity[][] BUNKERS = new Entity[4][20];
